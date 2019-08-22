@@ -1,66 +1,17 @@
-const { ApolloServer, gql } = require('apollo-server');
+require("dotenv").config();
 
-const books = [
+const { ApolloServer } = require('apollo-server');
+const mongoose = require("mongoose");
+
+mongoose.connect(
+  process.env.DATABASE,
   {
-    title: 'Harry Potter and the Chamber of Secrets',
-    author: 'J.K. Rowling',
-  },
-  {
-    title: 'Jurassic Park',
-    author: 'Michael Crichton',
-  },
-];
-
-const persons = [
-  {
-    name: 'pahola',
-    age: 24,
-  },
-  {
-    name: 'darío',
-    age: 24,
-  },
-];
-
-
-// SCHEMA
-const typeDefs = gql`
-  # Comments in GraphQL are defined with the hash (#) symbol.
-
-  # This "Book" type can be used in other type declarations.
-  type Book {
-    title: String
-    author: String
+    useCreateIndex: true,
+    useNewUrlParser: true,
   }
+);
 
-  type Person {
-    name: String
-    age: Int
-  }
+const mongoDB = mongoose.connection;
 
-  # The "Query" type is the root of all GraphQL queries.
-  # (A "Mutation" type will be covered later on.)
-  type Query {
-    books: [Book]
-    getPersons: [Person]
-  }
-`;
-
-// RESOLVERS
-const resolvers = {
-  Query: {
-    books: () => books,
-    getPersons: () => persons
-  },
-};
-
-// In the most basic sense, the ApolloServer can be started
-// by passing type definitions (typeDefs) and the resolvers
-// responsible for fetching the data for those types.
-const server = new ApolloServer({ typeDefs, resolvers });
-
-// This `listen` method launches a web-server.  Existing apps
-// can utilize middleware options, which we'll discuss later.
-server.listen().then(({ url }) => {
-  console.log(`🚀  Server ready at ${url}`);
-});
+mongoDB.on('error', console.error.bind(console, 'Error de conexion !!'));
+mongoDB.on('open', () => console.log('BD conectada !!'));
