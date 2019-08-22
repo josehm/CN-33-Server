@@ -24,7 +24,7 @@ const userSchema = new schema({
     enum: ['Hombre', 'Mujer']
   },
   post: [{
-    type: Schema.Types.ObjectId,
+    type: schema.Types.ObjectId,
     ref: 'posts'
   }]
 }, { timestamps: true });

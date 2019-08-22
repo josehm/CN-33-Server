@@ -1,13 +1,13 @@
-const moongose = require("mongoose");
+const mongoose = require("mongoose");
 
-const schema = moongose.Schema;
+const schema = mongoose.Schema;
 
 const postSchema = new schema({
   title: {
     type: String,
     require: true,
   },
-  constent: {
+  content: {
     type: String,
     require: true,
   },
@@ -21,7 +21,7 @@ const postSchema = new schema({
   }]
 }, { timestamps: true });
 
-mongoose.Types.ObjectId.proptype.valueOf = function () {
+mongoose.Types.ObjectId.prototype.valueOf = function () {
   return this.toString();
 }
 

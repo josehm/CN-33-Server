@@ -1,10 +1,14 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
-const userSchena = require('../schemas/userSchema');
+import userSchena from '../schemas/userSchema';
+import postSchema from '../schemas/postSchema';
+
 
 
 const UserModel = mongoose.model('users', userSchena);
+const PostModel = mongoose.model('posts', postSchema);
 
-module.exports = {
+export {
   UserModel,
+  PostModel,
 };
