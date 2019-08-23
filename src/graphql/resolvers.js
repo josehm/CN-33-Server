@@ -3,6 +3,10 @@ import {
   getPost,
 } from '../actions/postActions';
 
+import {
+  addCommentToPostActions,
+} from '../actions/commentActions';
+
 const books = [
   {
     title: 'Harry Potter and the Chamber of Secrets',
@@ -26,7 +30,14 @@ const resolvers = {
     }
   },
   Mutation: {
-    addPost: async (parent, args, context, info) => await createPost(args.data)
+    addPost: async (parent, args, context, info) => await createPost(args.data),
+    addCommentToPost: async (parent, { data }, context, info) => {
+      try {
+        return await addCommentToPostActions(data);
+      } catch (error) {
+        return error;
+      }
+    }
   }
 }
 

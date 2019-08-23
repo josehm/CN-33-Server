@@ -18,3 +18,10 @@ export const getPost = async () => {
   }
 };
 
+export const updatePost = async (filter, update) => {
+  try {
+    return await PostModel.findOneAndUpdate(filter, update, { new: true });
+  } catch (error) {
+    return error;
+  }
+}

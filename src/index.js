@@ -11,6 +11,7 @@ mongoose.connect(
   {
     useCreateIndex: true,
     useNewUrlParser: true,
+    useFindAndModify: false
   }
 );
 

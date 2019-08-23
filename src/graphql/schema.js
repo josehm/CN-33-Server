@@ -18,6 +18,17 @@ type Query {
   getPost: [Post]
 }
 
+type Comment {
+  _id: ID
+  content: String
+  postID: ID
+}
+
+input CommentInput {
+  content: String!
+  postID: ID
+}
+
 input PostInput {
   title: String,
   content: String
@@ -25,6 +36,7 @@ input PostInput {
 
 type Mutation {
   addPost(data: PostInput) : Post
+  addCommentToPost(data: CommentInput) : Comment
 }
 `;
 
