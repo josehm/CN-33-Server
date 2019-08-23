@@ -12,7 +12,7 @@ export const createPost = async (postData) => {
 
 export const getPost = async () => {
   try {
-    return await PostModel.find();
+    return  await PostModel.find().populate('comments');
   } catch (error) {
     return null;
   }

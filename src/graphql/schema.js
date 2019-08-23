@@ -11,6 +11,7 @@ type Post {
   title: String,
   content: String
   likes: Int
+  comments: [Comment]
 }
 
 type Query {
@@ -37,6 +38,7 @@ input PostInput {
 type Mutation {
   addPost(data: PostInput) : Post
   addCommentToPost(data: CommentInput) : Comment
+  updatePost(data: PostInput, postID: ID) : Post
 }
 `;
 
