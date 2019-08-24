@@ -25,6 +25,15 @@ type Comment {
   postID: ID
 }
 
+type User {
+  _id: ID
+  name: String!
+  lastName: String
+  email: String
+  password: String
+  gender: Gender
+}
+
 input CommentInput {
   content: String!
   postID: ID
@@ -35,9 +44,23 @@ input PostInput {
   content: String
 }
 
+enum Gender {
+  HOMBRE
+  MUJER
+}
+
+input UserInput {
+  name: String!
+  lastName: String
+  email: String
+  password: String
+  gender: Gender
+}
+
 type Mutation {
   addPost(data: PostInput) : Post
   addCommentToPost(data: CommentInput) : Comment
+  addUser(data: UserInput) : User
   updatePost(data: PostInput, postID: ID) : Post
 }
 `;

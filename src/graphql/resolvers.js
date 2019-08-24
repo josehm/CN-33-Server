@@ -8,6 +8,11 @@ import {
   addCommentToPostActions,
 } from '../actions/commentActions';
 
+import {
+  addUserAction,
+} from '../actions/userActions';
+
+
 const books = [
   {
     title: 'Harry Potter and the Chamber of Secrets',
@@ -44,6 +49,13 @@ const resolvers = {
         const filter = { _id: postID };
         const update = { $set: { ...data } };
         return await updatePost(filter, update);
+      } catch (error) {
+        return error;
+      }
+    },
+    addUser: async (parent, { data }, context, info) => {
+      try {
+        return await addUserAction(data);
       } catch (error) {
         return error;
       }
