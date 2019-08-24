@@ -1,6 +1,9 @@
 import { gql } from 'apollo-server';
 
 const typeDefs = gql`
+directive @AuthDirective on QUERY | FIELD_DEFINITION | FIELD
+
+
 type Book {
   title: String
   author: String
@@ -15,7 +18,7 @@ type Post {
 }
 
 type Query {
-  books: [Book]
+  books: [Book]  @AuthDirective
   getPost: [Post]
 }
 
@@ -64,6 +67,7 @@ input UserInput {
 type Mutation {
   addPost(data: PostInput) : Post
   addCommentToPost(data: CommentInput) : Comment
+  doLogin(email: String, password: String) : Token
   addUser(data: UserInput) : Token
   updatePost(data: PostInput, postID: ID) : Post
 }

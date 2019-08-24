@@ -5,6 +5,8 @@ import mongoose from "mongoose";
 
 import typeDefs from './graphql/schema';
 import resolvers from './graphql/resolvers';
+import { getContext, AuthDirective } from './actions/authActions';
+
 
 mongoose.connect(
   process.env.DATABASE,
@@ -23,6 +25,10 @@ mongoDB.on('open', () => console.log('BD conectada !!'));
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  schemaDirectives: {
+    AuthDirective: AuthDirective
+  },
+  context: async ({ req }) => getContext(req),
 });
 
 server.listen({ port: process.env.PORT }).then(({ url }) => {

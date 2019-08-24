@@ -10,6 +10,7 @@ import {
 
 import {
   addUserAction,
+  doLoginAction,
 } from '../actions/userActions';
 
 
@@ -56,6 +57,13 @@ const resolvers = {
     addUser: async (parent, { data }, context, info) => {
       try {
         return await addUserAction(data);
+      } catch (error) {
+        return error;
+      }
+    },
+    doLogin: async (parent, { email, password }, context, info) => {
+      try {
+        return await doLoginAction(email, password);
       } catch (error) {
         return error;
       }
