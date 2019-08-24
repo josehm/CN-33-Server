@@ -19,7 +19,7 @@ type Post {
 
 type Query {
   books: [Book]  @AuthDirective
-  getPost: [Post]
+  getPost: [Post] @AuthDirective
 }
 
 type Comment {

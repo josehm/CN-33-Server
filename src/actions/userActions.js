@@ -1,5 +1,7 @@
 import jwt from 'jsonwebtoken';
 
+import { UserModel } from '../database/models';
+
 Date.prototype.addDays = function (days) {
   const date = new Date(this.valueOf());
   date.setDate(date.getDate() + days);
@@ -15,7 +17,7 @@ const createToken = (userData) => {
     exp,
   }
 
-  const token = jwt.sign(payload, process.env.SERCRET);
+  const token = jwt.sign(payload, process.env.SECRET);
   return { token }
 }
 
@@ -35,6 +37,14 @@ export const doLoginAction = async (email, password) => {
     const user = await UserModel.findOne({ email });
     const token = createToken(user);
     return token;
+  } catch (error) {
+    return error;
+  }
+}
+
+export const findUserAction = async (filter) => {
+  try {
+    return await UserModel.findOne(filter);
   } catch (error) {
     return error;
   }

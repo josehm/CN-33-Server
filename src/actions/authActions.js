@@ -1,5 +1,7 @@
 const JWT = require('jsonwebtoken');
-const { UserModel } = require('../dataBase/models');
+import {
+  findUserAction
+} from '../actions/userActions';
 
 const { SchemaDirectiveVisitor, AuthenticationError } = require('apollo-server-express');
 
@@ -21,11 +23,14 @@ const getContext = (req) => {
   try {
     const token = req.headers.authorization;
     if (typeof token === typeof undefined) return req;
-    return JWT.verify(token, process.env.SECRET, function (err, result) {
+    return JWT.verify(token, process.env.SECRET, async function (err, result) {
       if (err) return req;
-      return UserModel.findOne({ _id: result._id }).then((user) => {
+      try {
+        const user = await findUserAction({ _id: result._id });
         return { ...req, user };
-      });
+      } catch (error) {
+        return req;
+      }
     });
   } catch (e) {
     return req;

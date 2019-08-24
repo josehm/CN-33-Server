@@ -8,7 +8,7 @@ const UserModel = mongoose.model('users', userSchena);
 const PostModel = mongoose.model('posts', postSchema);
 const CommentModel = mongoose.model('comments', commentSchema);
 
-export {
+module.exports = {
   UserModel,
   PostModel,
   CommentModel,
