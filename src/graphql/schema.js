@@ -25,6 +25,10 @@ type Comment {
   postID: ID
 }
 
+type Token {
+  token: String
+}
+
 type User {
   _id: ID
   name: String!
@@ -60,7 +64,7 @@ input UserInput {
 type Mutation {
   addPost(data: PostInput) : Post
   addCommentToPost(data: CommentInput) : Comment
-  addUser(data: UserInput) : User
+  addUser(data: UserInput) : Token
   updatePost(data: PostInput, postID: ID) : Post
 }
 `;
