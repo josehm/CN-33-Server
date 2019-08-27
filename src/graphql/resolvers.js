@@ -12,6 +12,7 @@ import {
   addUserAction,
   doLoginAction,
 } from '../actions/userActions';
+import { storeUpload } from '../utils/uploader';
 
 
 const books = [
@@ -56,7 +57,14 @@ const resolvers = {
     },
     addUser: async (parent, { data }, context, info) => {
       try {
-        return await addUserAction(data);
+        const { createReadStream } = await args.data.profileImage;
+        const stream = createReadStream();
+        const { url } = await storeUpload(stream);
+        const newUserInfo = {
+          ...data,
+          profileImage: url,
+        }
+        return await addUserAction(newUserInfo);
       } catch (error) {
         return error;
       }

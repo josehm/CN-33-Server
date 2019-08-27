@@ -39,6 +39,7 @@ type User {
   email: String
   password: String
   gender: Gender
+  profileImage: String
 }
 
 input CommentInput {
@@ -62,6 +63,7 @@ input UserInput {
   email: String
   password: String
   gender: Gender
+  profileImage: Upload
 }
 
 type Mutation {

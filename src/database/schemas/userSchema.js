@@ -27,7 +27,8 @@ const userSchema = new schema({
   post: [{
     type: schema.Types.ObjectId,
     ref: 'posts'
-  }]
+  }],
+  profileImage: String,
 }, { timestamps: true });
 
 mongoose.Types.ObjectId.prototype.valueOf = function () {
